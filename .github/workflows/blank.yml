@@ -1,0 +1,19 @@
+name: OCI Publish
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          curl -i -s -k \
+          -H "Authorization: Bearer `echo $PAT_READ_WRITE | base64`" \
+          -H "Content-Type: application/octet-stream" \
+          -H "Content-Length: $BLOB_LENGTH" \
+          -X PUT "https://ghcr.io/srahul3?digest=$BLOB_DIGEST" \
+          -d "$BLOB_BODY"
