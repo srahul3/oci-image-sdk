@@ -11,22 +11,11 @@ jobs:
 
       - name: Run a multi-line script
         run: |
-          PAT_READ_WRITE=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
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
           curl -i -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
-          -X POST https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
-          
-      - name: Run a multi-line script
-        run: |
-          PAT_READ_WRITE=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
-          digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
-          digest=sha256:$digest
-          echo $digest
-          curl -i -k \
-          -H "Authorization: Bearer `echo $PAT_READ_WRITE | base64`" \
           -X POST https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
           
       - name: Run a multi-line script
