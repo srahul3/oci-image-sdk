@@ -15,7 +15,7 @@ jobs:
           digest=sha256:$digest
           echo $digest
           curl -i -s -k \
-          -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
+          -H "Authorization: Bearer $GIHUB_TOKEN" \
           -X POST -D - -o /dev/null -s \
           https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
           
