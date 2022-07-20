@@ -9,10 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      
       - name: Run a multi-line script
         run: |
           curl -i -s -k \
-          -H "Authorization: Bearer `echo $PAT_READ_WRITE | base64`" \
+          -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: $BLOB_LENGTH" \
           -X PUT "https://ghcr.io/srahul3?digest=$BLOB_DIGEST" \
