@@ -19,8 +19,6 @@ jobs:
           -X POST -D - -o /dev/null -s \
           https://ghcr.io/v2/srahul3/hello/blobs/uploads/
           
-            - name: Run a multi-line script
-      
       - name: Run a multi-line script
         run: |
           digest=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
