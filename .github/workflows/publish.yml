@@ -11,7 +11,7 @@ jobs:
       
       - name: Run a multi-line script
         run: |
-          digest=$(echo -n echo -n foobar | sha256sum | sha256sum)
+          digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
           curl -i -s -k \
