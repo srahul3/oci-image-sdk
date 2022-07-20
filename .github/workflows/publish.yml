@@ -21,8 +21,8 @@ jobs:
           
       - name: Run a multi-line script
         run: |
-          digest=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
-          digest=sha256:$digest
+          sha=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
+          digest=sha256:$sha
           echo $digest
           BLOB_LENGTH=$(stat -c%s ./oras-archive.tar)
           curl -i -s -k \
@@ -30,4 +30,4 @@ jobs:
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: $BLOB_LENGTH" \
           -d @oras-archive.tar \
-          -X PUT "https://ghcr.io/v2/srahul3/hello/blobs/uploads/"
+          -X PUT "https://ghcr.io/v2/srahul3/hello/blobs/uploads/$sha"
