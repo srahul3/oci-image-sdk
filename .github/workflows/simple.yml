@@ -12,8 +12,6 @@ jobs:
 
       - name: Run a multi-line script
         run: |
-          TOKEN=$(curl --silent https://ghcr.io/token\?scope\=repository:srahul3/oci-image-sdk:push | jq -r .token)
-          GHCR_TOKEN=$(echo $GITHUB_TOKEN | base64)
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
