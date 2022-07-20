@@ -11,14 +11,14 @@ jobs:
 
       - name: Run a multi-line script
         run: |
-          TOKEN=$(curl --silent https://ghcr.io/token\?scope\=repository:srahul3/oci-image-sdk:pull | jq -r .token)
+          TOKEN=$(curl --silent https://ghcr.io/token\?scope\=repository:srahul3/oci-image-sdk:push | jq -r .token)
           GHCR_TOKEN=$(echo $GITHUB_TOKEN | base64)
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
           curl -i -k \
-          -H "Authorization: Bearer $GHCR_TOKEN" \
-          -X POST https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
+          -H "Authorization: Bearer $TOKEN" \
+          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/blobs/uploads/
           
       - name: Run a multi-line script
         run: |
