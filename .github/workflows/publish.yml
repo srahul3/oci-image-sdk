@@ -24,6 +24,7 @@ jobs:
           sha=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
           digest=sha256:$sha
           echo $digest
+          echo "https://ghcr.io/v2/srahul3/hello/blobs/uploads/$sha"
           BLOB_LENGTH=$(stat -c%s ./oras-archive.tar)
           curl -i -s -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
