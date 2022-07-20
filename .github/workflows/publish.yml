@@ -1,0 +1,23 @@
+name: OCI Publish2
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      
+      - name: Run a multi-line script
+        run: |
+          digest=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
+          digest=sha256:$digest
+          echo $digest
+          curl -i -s -k \
+          -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
+          -H "Content-Type: application/octet-stream" \
+          -H "Content-Length: 5" \
+          -X PUT "https://ghcr.io/srahul3?digest=$digest" \
+          -d "Hello"
