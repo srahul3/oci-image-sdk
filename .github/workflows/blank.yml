@@ -16,7 +16,8 @@ jobs:
           digest=sha256:$digest
           echo $digest
           BLOB_BODY=$(xxd -b ./oras-archive.tar)
-          echo $BLOB_BODY
+          FILENAME=/home/heiko/dummy/packages.txt
+          BLOB_LENGTH=$(stat -c%s ./oras-archive.tar)
           curl -i -s -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
           -H "Content-Type: application/octet-stream" \
