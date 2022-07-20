@@ -33,3 +33,10 @@ jobs:
           -d @oras-archive.tar \
           -X PATCH -D - -o /dev/null -s \
           https://ghcr.io/v2/srahul3/foobar/blobs/uploads/$sha
+      
+      - name: list all blobs
+        run: |
+          curl -i -s -k \
+          -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
+          -X GET -D - -o /dev/null -s \
+          https://ghcr.io/v2/_catalog
