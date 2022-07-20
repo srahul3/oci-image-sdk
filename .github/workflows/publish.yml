@@ -30,5 +30,4 @@ jobs:
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: $BLOB_LENGTH" \
           -d @oras-archive.tar \
-          -X PUT "https://ghcr.io/srahul3?digest=$digest" \
-          https://ghcr.io/v2/srahul3/hello/blobs/uploads/
+          -X PUT "https://ghcr.io/v2/srahul3/hello/blobs/uploads/"
