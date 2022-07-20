@@ -13,7 +13,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           digest=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
-          echo digest
+          echo $digest
           curl -i -s -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
           -H "Content-Type: application/octet-stream" \
