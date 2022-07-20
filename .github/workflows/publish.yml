@@ -25,7 +25,7 @@ jobs:
           echo $digest
           echo "https://ghcr.io/v2/srahul3/foobar/blobs/uploads/$sha"
           BLOB_LENGTH=$(stat -c%s ./oras-archive.tar)
-          curl -i -s -k \
+          curl -i -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: $BLOB_LENGTH" \
@@ -35,7 +35,7 @@ jobs:
       
       - name: list all blobs
         run: |
-          curl -i -s -k \
+          curl -i -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
           -X GET -D - -o /dev/null -s \
           https://ghcr.io/v2/_catalog
