@@ -11,13 +11,12 @@ jobs:
       
       - name: Run a multi-line script
         run: |
+          PAT_READ_WRITE = ${{ github.pat }}
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
-          curl -i -s -k \
-          -H "Authorization: Bearer $GIHUB_TOKEN" \
-          -X POST -D - -o /dev/null -s \
-          https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
+          curl -i -s -k -H "Authorization: Bearer `echo $PAT_READ_WRITE | base64`" \
+          -X POST https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
           
       - name: Run a multi-line script
         run: |
