@@ -1,0 +1,22 @@
+
+name: OCI Publish-basic
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          TOKEN=$(curl --silent https://ghcr.io/token\?scope\=repository:srahul3/oci-image-sdk:push | jq -r .token)
+          GHCR_TOKEN=$(echo $GITHUB_TOKEN | base64)
+          digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
+          digest=sha256:$digest
+          echo $digest
+          curl -i -k \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/blobs/uploads/
