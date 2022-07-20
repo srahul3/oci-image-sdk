@@ -11,20 +11,20 @@ jobs:
       
       - name: Run a multi-line script
         run: |
-          digest=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
+          digest=$(echo -n echo -n foobar | sha256sum | sha256sum)
           digest=sha256:$digest
           echo $digest
           curl -i -s -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
           -X POST -D - -o /dev/null -s \
-          https://ghcr.io/v2/srahul3/hello/blobs/uploads/
+          https://ghcr.io/v2/srahul3/foobar/blobs/uploads/
           
       - name: Run a multi-line script
         run: |
           sha=$(sha256sum ./oras-archive.tar | awk -F ' ' '{print $1}')
           digest=sha256:$sha
           echo $digest
-          echo "https://ghcr.io/v2/srahul3/hello/blobs/uploads/$sha"
+          echo "https://ghcr.io/v2/srahul3/foobar/blobs/uploads/$sha"
           BLOB_LENGTH=$(stat -c%s ./oras-archive.tar)
           curl -i -s -k \
           -H "Authorization: Bearer `echo $GIHUB_TOKEN`" \
@@ -32,4 +32,4 @@ jobs:
           -H "Content-Length: $BLOB_LENGTH" \
           -d @oras-archive.tar \
           -X PATCH -D - -o /dev/null -s \
-          https://ghcr.io/v2/srahul3/hello/blobs/uploads/$sha
+          https://ghcr.io/v2/srahul3/foobar/blobs/uploads/$sha
