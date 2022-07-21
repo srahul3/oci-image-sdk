@@ -15,6 +15,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: auth check
+        run: |
+          curl -i -k \
+          -H "Authorization: Bearer `echo $GITHUB_TOKEN`" \
+          -X POST https://ghcr.io/v2/
 
       - name: using token
         run: |
