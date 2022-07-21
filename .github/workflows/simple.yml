@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a multi-line script
+      - name: using token
         run: |
           TOKEN1=$(curl -Ls -u x-oauth-token:$GITHUB_TOKEN 'https://ghcr.io/token?scope=repository:srahul3/oci-image-sdk:pull,push' | jq -r .token)
           TOKEN=$(curl --silent https://ghcr.io/token\?scope\=repository:srahul3/oci-image-sdk:pull,push | jq -r .token)
@@ -27,7 +27,7 @@ jobs:
           -H "Authorization: Bearer $TOKEN1" \
           -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/blobs/uploads/
 
-      - name: Run a multi-line script 2
+      - name: using gh token
         run: |
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
