@@ -26,7 +26,9 @@ jobs:
       - name: using token
         run: |
           TOKEN1=$(curl -Ls -u x-oauth-token:$GITHUB_TOKEN 'https://ghcr.io/token?scope=repository:srahul3/oci-image-sdk:pull,push' | jq -r .token)
-          TOKEN=$(curl --silent https://ghcr.io/token\?scope\=repository:srahul3/oci-image-sdk:pull,push | jq -r .token)
+          TOKEN=$(curl --silent https://ghcr.io/token?scope=repository:srahul3/oci-image-sdk:pull,push | jq -r .token)
+          echo $TOKEN
+          echo $TOKEN1
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
