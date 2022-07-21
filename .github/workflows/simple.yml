@@ -39,6 +39,6 @@ jobs:
           digest=sha256:$digest
           echo $digest
           curl -i -k \
-          -H "Authorization: Bearer `echo $GITHUB_TOKEN`" \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "User-Agent: oras-py" \
           -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/blobs/uploads/
