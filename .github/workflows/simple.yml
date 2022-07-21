@@ -44,4 +44,4 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           -H "User-Agent: oras-py" \
           -H "content-type: application/json" \
-          -X POST https://ghcr.io/v2/srahul3/packages/oci-image-sdk/blobs/uploads/
+          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/packages/blobs/uploads/
