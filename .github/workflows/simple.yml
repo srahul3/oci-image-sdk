@@ -16,14 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: auth check
-        run: |
-          curl -i -k \
-          -H "Authorization: Bearer `echo -n ${{ secrets.GITHUB_TOKEN }} | base64`" \
-          -X POST https://ghcr.io/v2/
-
-      
-      - name: using pat
+      - name: using GITHUB_TOKEN
         run: |
           b64token=$(echo -n ${{ secrets.GITHUB_TOKEN }} | base64)
           digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
@@ -33,28 +26,3 @@ jobs:
           -H "Authorization: Bearer $b64token" \
           -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/blobs/uploads/
           
-      - name: using token
-        run: |
-          R1=$(curl -Ls -u x-oauth-token:$GITHUB_TOKEN 'https://ghcr.io/token?scope=repository:srahul3/oci-image-sdk/ociart:pull,push')
-          R2=$(curl --silent 'https://ghcr.io/token?scope=repository:srahul3/oci-image-sdk:pull,push')
-          echo $R1
-          echo $R2
-          $TOKEN = $($R1 | jq -r .token)
-          digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
-          digest=sha256:$digest
-          echo $digest
-          curl -i -k \
-          -H "Authorization: Bearer $TOKEN1" \
-          -H "content-type: application/json" \
-          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/blobs/uploads/
-
-      - name: using gh token
-        run: |
-          digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
-          digest=sha256:$digest
-          echo $digest
-          curl -i -k \
-          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -H "User-Agent: oras-py" \
-          -H "content-type: application/json" \
-          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/packages/blobs/uploads/
