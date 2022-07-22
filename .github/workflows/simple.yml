@@ -26,5 +26,5 @@ jobs:
           -H "Authorization: Bearer $b64token" \
           -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/blobs/uploads/)
           echo $output
-          echo $output | awk -v key="location" -v RS='\n' -F':' '$1==key{print $2}'
-          
+          location=$(echo $output | grep location: | sed 's/location://' | xargs)
+          echo $location
