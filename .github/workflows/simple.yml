@@ -19,7 +19,6 @@ jobs:
       - name: auth check
         run: |
           curl -i -k \
-          -H "content-type: application/json" \
           -H "Authorization: Bearer `echo -n ${{ secrets.GITHUB_TOKEN }} | base64`" \
           -X POST https://ghcr.io/v2/
 
