@@ -23,6 +23,17 @@ jobs:
           -H "Authorization: Bearer `echo $GITHUB_TOKEN`" \
           -X POST https://ghcr.io/v2/
 
+      
+      - name: using pat
+        run: |
+          b64token=$(echo -n ${{ secrets.GITHUB_TOKEN }} | base64)
+          digest=$(echo -n echo -n foobar | sha256sum | awk -F ' ' '{print $1}')
+          digest=sha256:$digest
+          echo $digest
+          curl -i -k \
+          -H "Authorization: Bearer $b64token" \
+          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/blobs/uploads/
+          
       - name: using token
         run: |
           R1=$(curl -Ls -u x-oauth-token:$GITHUB_TOKEN 'https://ghcr.io/token?scope=repository:srahul3/oci-image-sdk/ociart:pull,push')
