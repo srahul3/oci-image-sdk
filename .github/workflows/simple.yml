@@ -34,9 +34,10 @@ jobs:
           digest=$(echo -n echo -n hello | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
+          echo https://ghcr.io$location?digest=$digest
           curl -i -f -k \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: 5" \
-          -X PUT "https://ghcr.io$location?digest=$digest" \
+          -X PUT https://ghcr.io$location?digest=$digest \
           -d "Hello"
