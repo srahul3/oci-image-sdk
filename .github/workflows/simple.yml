@@ -39,6 +39,7 @@ jobs:
           curl -i -f -k \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -H "Content-Length: 5" \
-          -X PUT $blobUrl \
-          -d "Hello"
+          -H "Content-Range: 0-5" \
+          -d "Hello" \
+          -X PATCH -D - -o /dev/null -s \
+          $blobUrl
