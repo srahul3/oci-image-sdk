@@ -37,10 +37,10 @@ jobs:
           blobUrl=$(echo https://ghcr.io$location?digest=$digest | tr -d '\r')
           blobUrl2=$(echo https://ghcr.io$location | tr -d '\r')
           echo $blobUrl
-          curl -i -f -k \
+          curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -H "Content-Range: 0-5" \
-          -d "Hello" \
+          -H "Content-Range: 0-10" \
+          -d "Hello world" \
           -X PATCH -D - -o /dev/null -s \
           $blobUrl2
