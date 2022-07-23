@@ -40,15 +40,8 @@ jobs:
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -H "Content-Range: 0-5" \
-          -d "Hello " \
-          -X PATCH -D - -o /dev/null -s \
-          $blobUrl2
-          curl -i \
-          -H "Authorization: Bearer $b64token" \
-          -H "Content-Type: application/octet-stream" \
-          -H "Content-Range: 5-10" \
-          -d "world" \
+          -H "Content-Range: 0-10" \
+          -d "Hello world" \
           -X PATCH -D - -o /dev/null -s \
           $blobUrl2
           curl -i \
