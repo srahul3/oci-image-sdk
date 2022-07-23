@@ -35,6 +35,7 @@ jobs:
           digest=sha256:$digest
           echo $digest
           blobUrl=$(echo https://ghcr.io$location?digest=$digest | tr -d '\r')
+          blobUrl2=$(echo https://ghcr.io$location | tr -d '\r')
           echo $blobUrl
           curl -i -f -k \
           -H "Authorization: Bearer $b64token" \
@@ -42,4 +43,4 @@ jobs:
           -H "Content-Range: 0-5" \
           -d "Hello" \
           -X PATCH -D - -o /dev/null -s \
-          $blobUrl
+          $blobUrl2
