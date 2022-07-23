@@ -24,7 +24,7 @@ jobs:
           echo $digest
           output=$(curl -i -k -f \
           -H "Authorization: Bearer $b64token" \
-          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/blobs/uploads/)
+          -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/blobs/uploads/ | grep .location)
           echo $output
           location=$(echo $output | grep location: | sed 's/location://' | xargs)
           echo $location
