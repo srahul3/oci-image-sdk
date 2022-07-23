@@ -44,3 +44,8 @@ jobs:
           -d "Hello world" \
           -X PATCH -D - -o /dev/null -s \
           $blobUrl2
+          curl -i \
+          -H "Authorization: Bearer $b64token" \
+          -H "Content-Type: application/octet-stream" \
+          -X PUT -D - -o /dev/null -s \
+          $blobUrl
