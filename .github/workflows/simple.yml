@@ -31,7 +31,7 @@ jobs:
           content=$(sed -e '1,/^\r$/d' -e '$d' <<<"$response")
           location=$(grep -oiP 'Location: \K.*' <<<"$headers")
           echo $location
-          digest=$(echo -n echo -n hello | sha256sum | awk -F ' ' '{print $1}')
+          digest=$(echo -n echo -n "Hello world" | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
           blobUrl=$(echo https://ghcr.io$location?digest=$digest | tr -d '\r')
@@ -40,8 +40,15 @@ jobs:
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -H "Content-Range: 0-10" \
-          -d "Hello world" \
+          -H "Content-Range: 0-5" \
+          -d "Hello " \
+          -X PATCH -D - -o /dev/null -s \
+          $blobUrl2
+          curl -i \
+          -H "Authorization: Bearer $b64token" \
+          -H "Content-Type: application/octet-stream" \
+          -H "Content-Range: 5-10" \
+          -d "world" \
           -X PATCH -D - -o /dev/null -s \
           $blobUrl2
           curl -i \
