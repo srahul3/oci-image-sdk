@@ -46,7 +46,5 @@ jobs:
           $blobUrl2
           curl -i \
           -H "Authorization: Bearer $b64token" \
-          -H "Content-Length: 10" \
-          -H "Content-Range: 0-10" \
           -H "Content-Type: application/octet-stream" \
           -X PUT $blobUrl
