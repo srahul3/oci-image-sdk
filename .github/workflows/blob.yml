@@ -31,7 +31,7 @@ jobs:
           content=$(sed -e '1,/^\r$/d' -e '$d' <<<"$response")
           location=$(grep -oiP 'Location: \K.*' <<<"$headers")
           echo $location
-          digest=$(echo -n echo -n "Hello world" | sha256sum | awk -F ' ' '{print $1}')
+          digest=$(sha256sum ./oras-archive.tar |  awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
           blobUrl=$(echo https://ghcr.io$location | tr -d '\r')
