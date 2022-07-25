@@ -51,3 +51,7 @@ jobs:
           -H "Content-Type: application/octet-stream" \
           -X PUT -G -D - -o /dev/null -s \
           $completionURL
+          curl -i 
+          -H "Authorization: Bearer $b64token" \
+          -H "Accept: application/vnd.docker.distribution.manifest.v1+json" \
+          -X PUT https://ghcr.io/v2/srahul3/oci-image-sdk/ociart/manifests/v1.0.1;
