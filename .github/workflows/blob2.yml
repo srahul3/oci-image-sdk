@@ -42,6 +42,7 @@ jobs:
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: $size" \
+          -H "Accept: application/vnd.actions.packages.layer.v1+tar" \
           --data-binary @"./oras-archive.tar" \
           -X PATCH -D - -o /dev/null -s \
           $blobUrl
@@ -53,5 +54,5 @@ jobs:
           $completionURL
           curl -i \
           -H "Authorization: Bearer $b64token" \
-          -H "Accept: application/vnd.docker.distribution.manifest.v1+json" \
+          -H "Accept: application/vnd.actions.packages.layer.v1+json" \
           -X PUT https://ghcr.io/v2/srahul3/oci-image-sdk/manifests/v1.0.1;
