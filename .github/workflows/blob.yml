@@ -42,11 +42,11 @@ jobs:
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -H "Content-Range: 0-10" \
-          -d "Hello world" \
+          -H "Content-Length: $size"
+          --data-binary @"./oras-archive.tar"
           -X PATCH -D - -o /dev/null -s \
           $blobUrl2
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -X PUT $blobUrl
+          -X PUT -G $blobUrl
