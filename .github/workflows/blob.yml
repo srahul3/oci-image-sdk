@@ -49,4 +49,5 @@ jobs:
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -X PUT -G $completionURL
+          -X PUT -G -D - -o /dev/null -s \
+          $completionURL
