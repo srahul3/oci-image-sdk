@@ -24,7 +24,7 @@ jobs:
           echo $digest
           response=$(curl -i -k -f \
           -H "Authorization: Bearer $b64token" \
-          -H "Content-Type: application/json" \
+          -H "Content-Type: application/vnd.actions.packages.layer.v1+json" \
           -X POST https://ghcr.io/v2/srahul3/oci-image-sdk/blobs/uploads/)
           echo $response
           headers=$(sed -n '1,/^\r$/p' <<<"$response")
@@ -42,14 +42,13 @@ jobs:
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
           -H "Content-Length: $size" \
-          -H "Accept: application/vnd.actions.packages.layer.v1+tar" \
           --data-binary @"./oras-archive.tar" \
           -X PATCH -D - -o /dev/null -s \
           $blobUrl
           completionURL=$(echo https://ghcr.io$location?digest=$digest | tr -d '\r')
           curl -i \
           -H "Authorization: Bearer $b64token" \
-          -H "Content-Type: application/octet-stream" \
+          -H "Content-Type: application/vnd.oci.image.layer.v1.tar" \
           -X PUT -G -D - -o /dev/null -s \
           $completionURL
           curl -i \
