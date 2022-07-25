@@ -34,19 +34,19 @@ jobs:
           digest=$(echo -n echo -n "Hello world" | sha256sum | awk -F ' ' '{print $1}')
           digest=sha256:$digest
           echo $digest
-          blobUrl=$(echo https://ghcr.io$location?digest=$digest | tr -d '\r')
-          blobUrl2=$(echo https://ghcr.io$location | tr -d '\r')
+          blobUrl=$(echo https://ghcr.io$location | tr -d '\r')
           echo $blobUrl
           size=$(ls -l ./oras-archive.tar | awk -F ' ' '{print $5}')
           echo $size
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -H "Content-Length: $size"
-          --data-binary @"./oras-archive.tar"
+          -H "Content-Length: $size" \
+          --data-binary @"./oras-archive.tar" \
           -X PATCH -D - -o /dev/null -s \
-          $blobUrl2
+          $blobUrl
+          completionURL=$(echo https://ghcr.io$location?digest=$digest | tr -d '\r')
           curl -i \
           -H "Authorization: Bearer $b64token" \
           -H "Content-Type: application/octet-stream" \
-          -X PUT -G $blobUrl
+          -X PUT -G $completionURL
