@@ -49,5 +49,4 @@ jobs:
           -H "Content-Length: 10" \
           -H "Content-Range: 0-10" \
           -H "Content-Type: application/octet-stream" \
-          -X PUT -D - -o /dev/null -s \
-          $blobUrl
+          -X PUT $blobUrl
