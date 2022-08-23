@@ -24,4 +24,7 @@ jobs:
           run_id: ${{github.run_id}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: curl
+        run: |
+          curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" -s \
+          -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}"
