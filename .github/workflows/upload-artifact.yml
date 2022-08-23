@@ -14,14 +14,14 @@ jobs:
           name: my-artifact
           path: ${{ github.workspace }}          
       - name: Use URL for something
-        run: echo "${{github.event.inputs.run_id}}"
+        run: echo "${{github.run_id}}"
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
           route: GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
           owner: "srahul3"
           repo: "oci-image-sdk"
-          run_id: ${{github.event.inputs.run_id}}
+          run_id: ${{github.run_id}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
