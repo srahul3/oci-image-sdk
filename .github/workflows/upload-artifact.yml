@@ -21,17 +21,7 @@ jobs:
       
       - name: Use URL for something
         run: echo "${{github.run_id}}"
-      
-      - uses: octokit/request-action@v2.x
-        id: get_latest_release
-        with:
-          route: GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
-          owner: "srahul3"
-          repo: "oci-image-sdk"
-          run_id: ${{github.run_id}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+    
       - name: curl
         run: |
           curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/artifacts" -s \
@@ -39,9 +29,8 @@ jobs:
 
       - name: curl
         run: |
-          curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" -s \
-          -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}"
-      - uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
-          path: my-artifact
+          curl \
+          -H "Accept: application/vnd.github+json" \ 
+          -H "Authorization: token <TOKEN>" \
+          "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts"
+
