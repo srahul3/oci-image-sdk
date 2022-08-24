@@ -31,5 +31,5 @@ jobs:
         run: |
           curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" \
           -H "Accept: application/vnd.github+json" \ 
-          -H "Authorization: token <TOKEN>"
+          -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}"
 
