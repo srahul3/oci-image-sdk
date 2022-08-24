@@ -14,12 +14,16 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: ts-js-artifact
-          path: ${{ github.workspace }}          
-    
-      - name: Sleep for 10 seconds
+          path: ${{ github.workspace }}
+          
+      - name: echo run-id
+        run: |
+          echo "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts"
+      
+      - name: Sleep for 60 seconds
         uses: kibertoad/wait-action@1.0.1
         with:
-          time: '10s'
+          time: '60s'
 
       - name: curl
         run: |
