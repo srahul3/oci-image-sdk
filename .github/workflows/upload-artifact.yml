@@ -29,8 +29,7 @@ jobs:
 
       - name: curl
         run: |
-          curl \
+          curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" \
           -H "Accept: application/vnd.github+json" \ 
-          -H "Authorization: token <TOKEN>" \
-          "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts"
+          -H "Authorization: token <TOKEN>"
 
