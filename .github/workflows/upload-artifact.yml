@@ -8,13 +8,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: View the github context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - uses: actions/upload-artifact@v3
         with:
           name: my-artifact
           path: ${{ github.workspace }}          
+      
       - name: Use URL for something
         run: echo "${{github.run_id}}"
+      
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
@@ -24,6 +31,7 @@ jobs:
           run_id: ${{github.run_id}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: curl
         run: |
           curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" -s \
