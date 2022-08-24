@@ -16,10 +16,10 @@ jobs:
           name: ts-js-artifact
           path: ${{ github.workspace }}          
     
-      - name: Sleep for 30 seconds
+      - name: Sleep for 10 seconds
         uses: kibertoad/wait-action@1.0.1
         with:
-          time: '30s'
+          time: '10s'
 
       - name: curl
         run: |
