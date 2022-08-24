@@ -15,6 +15,7 @@ jobs:
         with:
           name: ts-js-artifact
           path: ${{ github.workspace }}
+          retention-days: 1
           
       - name: echo run-id
         run: |
