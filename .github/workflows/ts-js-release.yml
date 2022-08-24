@@ -1,0 +1,28 @@
+name: Create a action release
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      # build, minify, obfuscate
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ts-js-artifact
+          path: ${{ github.workspace }}          
+    
+      - name: Sleep for 30 seconds
+        uses: kibertoad/wait-action@1.0.1
+        with:
+          time: '30s'
+
+      - name: curl
+        run: |
+          curl "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" \
+          -H "Accept: application/vnd.github+json" \ 
+          -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}"
