@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish:
+  create:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +19,19 @@ jobs:
       - name: echo run-id
         run: |
           echo "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts"
-      
-      - name: Sleep for 60 seconds
-        uses: kibertoad/wait-action@1.0.1
-        with:
-          time: '60s'
+
+      - name: curl
+        run: |
+          curl -X GET "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts" -H "Accept: application/vnd.github+json" -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}"
+          
+  validate:
+    needs: [create]
+    runs-on: ubuntu-latest
+
+    steps:    
+      - name: echo run-id
+        run: |
+          echo "https://api.github.com/repos/srahul3/oci-image-sdk/actions/runs/${{github.run_id}}/artifacts"
 
       - name: curl
         run: |
