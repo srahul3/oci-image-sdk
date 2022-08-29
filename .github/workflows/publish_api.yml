@@ -22,6 +22,6 @@ jobs:
           repo: "b"
           use_default: true
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       # echo "Default Opt Status : ${{ fromJson(steps.get_updated_opt_status.outputs.data).use_default }}"
