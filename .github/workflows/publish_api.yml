@@ -1,4 +1,4 @@
-name: Update OIDC Opt Status
+name: Publish OCI Image using API
 
 on: 
   workflow_dispatch:
