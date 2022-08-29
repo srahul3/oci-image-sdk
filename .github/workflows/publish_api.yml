@@ -20,14 +20,7 @@ jobs:
           pwd          
           cd /tmp
           ls -ltr | grep tar.gz
-      - name: Publish
-        uses: octokit/request-action@v2.x
-        with:
-          route: PUT /repos/{owner}/{repo}/actions/package
-          owner: "a"
-          repo: "b"
-          use_default: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      # echo "Default Opt Status : ${{ fromJson(steps.get_updated_opt_status.outputs.data).use_default }}"
+      - name: API Publish
+        run: |
+          curl -X POST "https.api.github.com/repos/srahul3/oci-image-sdk/actions/package" -H "A ${{ secrets.GITHUB_TOKEN }}"
+     
