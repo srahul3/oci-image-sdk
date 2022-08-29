@@ -10,10 +10,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create archive
         run: |
-          tar -czvf release.tar.gz ./
-          mv ./release.tar.gz /tmp          
-          cd /tmp          
-          echo "$(ls -ltr)"
+          wdir=$(pwd)
+          cd /tmp
+          tar -czvf release.tar.gz ${wdir}          
+          cd ${wdir}          
+          echo "$(pwd)"
       - name: Publish
         uses: octokit/request-action@v2.x
         with:
