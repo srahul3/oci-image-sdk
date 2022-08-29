@@ -15,6 +15,11 @@ jobs:
           tar -czvf release.tar.gz ${wdir}          
           cd ${wdir}          
           echo "$(pwd)"
+      - name: verify
+        run: |
+          pwd          
+          cd /tmp
+          ls -ltr | grep tar.gz
       - name: Publish
         uses: octokit/request-action@v2.x
         with:
