@@ -10,10 +10,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create archive
         run: |
-          echo "pwd"
+          echo "$(pwd)"
           cd ..
-          echo "pwd"
-          echo "ls -ltr"
+          echo "$(pwd)"
+          echo "$(ls -ltr)"
       - name: Publish
         uses: octokit/request-action@v2.x
         with:
