@@ -22,5 +22,11 @@ jobs:
           ls -ltr | grep tar.gz
       - name: API Publish
         run: |
-          curl -isb -X POST "https://api.github.com/repos/srahul3/oci-image-sdk/actions/package" -H "Authorization: bearer ${{ secrets.PAT }}" -H "Content-Type: application/octet-stream" -H "tag: 1.0.2-multilayer" --data-binary "@/tmp/release.tar.gz"
+          curl -isb -X POST "https://api.github.com/repos/srahul3/oci-image-sdk/actions/package" -H "Authorization: bearer ${{ secrets.PAT }}" -H "Content-Type: application/octet-stream" -H "tag: 1.0.2-multilayer" --data-binary "@/tmp/release.tar.gz" | { /
+            read body /
+            read code /
+            echo $code /
+            echo $body /
+          } /
+          
      
