@@ -41,3 +41,12 @@ jobs:
           --header 'tag: 1.0.1-ghtoken' \
           --data-binary "@/tmp/release.tar.gz" \
           --fail
+      - name: API Publish using GITHUB_TOKEN
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/actions/package \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/octet-stream' \
+          --header 'tag: 1.0.1-ghtoken' \
+          --data-binary "@/tmp/release.tar.gz" \
+          --fail
