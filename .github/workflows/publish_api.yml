@@ -37,5 +37,9 @@ jobs:
           ls -ltr | grep tar.gz
       - name: API Publish
         run: |
-          response=$(curl -sb -X POST "https://api.github.com/repos/srahul3/oci-image-sdk/actions/package" -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" -H "Content-Type: application/octet-stream" -H "tag: 1.0.2-multilayeraction" --data-binary "@/tmp/release.tar.gz")
-          echo ${response}
+          curl --request POST \
+          --url http://api.github.localhost/repos/${{ github.repository }}/actions/package \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/octet-stream' \
+          --data-binary "@/tmp/release.tar.gz" \
+          --fail
