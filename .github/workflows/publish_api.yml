@@ -23,4 +23,4 @@ jobs:
       - name: API Publish
         run: |
           response=$(curl -sb -X POST "https://api.github.com/repos/srahul3/oci-image-sdk/actions/package" -H "Authorization: bearer ${{ secrets.PAT }}" -H "Content-Type: application/octet-stream" -H "tag: 1.0.2-multilayeraction" --data-binary "@/tmp/release.tar.gz")
-          echo $(response)
+          echo ${response}
