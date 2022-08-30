@@ -49,5 +49,4 @@ jobs:
           --header 'content-type: application/octet-stream' \
           --header 'tag: 1.0.1-ghtoken' \
           --data-binary "@/tmp/release.tar.gz" \
-          --silent \
           --fail
