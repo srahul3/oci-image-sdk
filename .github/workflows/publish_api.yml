@@ -26,15 +26,12 @@ jobs:
       - name: Create archive
         run: |
           wdir=$(pwd)
-          cd /tmp
-          tar -czvf release.tar.gz ${wdir}          
-          cd ${wdir}          
-          echo "$(pwd)"
+          echo ${wdir}
+          mkdir -p /tmp
+          tar -czvf /tmp/release.tar.gz .             
       - name: verify
-        run: |
-          pwd          
-          cd /tmp
-          ls -ltr | grep tar.gz
+        run: |          
+          ls -ltr /tmp | grep tar.gz
       - name: API Publish
         run: |
           curl --request POST \
